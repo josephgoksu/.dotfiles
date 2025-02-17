@@ -1,0 +1,69 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = '[✗](bold red)'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+# Customize directory display
+[directory]
+truncation_length = 3
+truncate_to_repo = false
+style = "bold blue"
+read_only = " 🔒"
+
+# Git Status Symbols
+[git_status]
+ahead = "⇡${count}"
+behind = "⇣${count}"
+conflicted = "🏳"
+untracked = "🟡"
+stashed = "📦"
+modified = "✏"
+deleted = "🗑"
+
+[git_branch]
+symbol = "🌿 "
+style = "bold purple"
+format = "$symbol$branch "
+
+# Bun configuration
+[bun]
+disabled = false
+format = "via 🥟 [$version]($style) "
+detect_files = ["bun.lockb"]
+detect_folders = ["node_modules"]
+
+# Display command execution time if longer than 500ms
+[cmd_duration]
+min_time = 500
+format = "⏳ [$duration]($style) "
+style = "bold yellow"
+
+# Battery indicator (useful for laptops)
+[battery]
+disabled = false
+format = "🔋 [$percentage]($style) "
+full_symbol = "⚡"
+charging_symbol = "⚡"
+discharging_symbol = "🔋"
+
+# Python version (only shown if inside a Python project)
+[python]
+disabled = false
+format = "via 🐍 [$version]($style) "
+detect_files = ["pyproject.toml", "requirements.txt", "Pipfile"]
+
+# Node.js version (only shown if inside a Node.js project)
+[nodejs]
+disabled = false
+format = "via 🟢 [$version]($style) "
+detect_files = ["package.json", "node_modules"]
