@@ -1,5 +1,4 @@
 tap "dagger/tap"
-tap "homebrew/bundle"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "mongodb/brew"

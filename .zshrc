@@ -12,7 +12,7 @@ CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
 
 # Auto-update settings for Oh My Zsh
-zstyle ':omz:update' mode auto  # update automatically
+zstyle ':omz:update' mode auto # update automatically
 zstyle ':omz:update' frequency 13
 
 # Enable command auto-correction and completion waiting dots
@@ -27,24 +27,23 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Plugins - keep lightweight to ensure fast startup
 plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  fast-syntax-highlighting
-  zsh-completions
-  fzf
-  alias-tips
-  history-substring-search
-  docker
-  docker-compose
-  aws
-  golang
-  npm
-  nvm
-  kubectl
-  terraform
-  gh
-  git-extras
+    git
+    zsh-autosuggestions
+    fast-syntax-highlighting
+    zsh-completions
+    fzf
+    alias-tips
+    history-substring-search
+    docker
+    docker-compose
+    aws
+    golang
+    npm
+    nvm
+    kubectl
+    terraform
+    gh
+    git-extras
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -52,10 +51,13 @@ source $ZSH/oh-my-zsh.sh
 # Set language and editor preferences
 export LANG=en_US.UTF-8
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+    export EDITOR='vim'
 else
-  export EDITOR='nvim'
+    export EDITOR='nvim'
 fi
+
+# Enable Docker BuildKit
+export DOCKER_BUILDKIT=1
 
 # Load NVM properly
 export NVM_DIR="$HOME/.nvm"
@@ -66,10 +68,12 @@ export NVM_DIR="$HOME/.nvm"
 export GPG_TTY=$(tty)
 
 # Add Windsurf, Go, and additional binaries to PATH
-export PATH="/Users/josephgoksu/.codeium/windsurf/bin:$PATH"
+# Consolidate PATH modifications
 export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"  # Rust binaries
-export PATH="$HOME/.krew/bin:$PATH"   # Krew for Kubernetes plugins
+export PATH="$HOME/.cargo/bin:$PATH"                         # Rust binaries
+export PATH="$HOME/.krew/bin:$PATH"                          # Krew for Kubernetes plugins
+export PATH="/Users/josephgoksu/.codeium/windsurf/bin:$PATH" # Added from previous separate export
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"            # Added from previous separate export
 
 # Initialize Starship prompt
 eval "$(starship init zsh)"
@@ -90,5 +94,4 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
