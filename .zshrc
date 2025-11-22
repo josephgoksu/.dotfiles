@@ -16,7 +16,7 @@ zstyle ':omz:update' mode auto # update automatically
 zstyle ':omz:update' frequency 13
 
 # Enable command auto-correction and completion waiting dots
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 
 # Disable marking untracked files as dirty (improves speed in large repos)
