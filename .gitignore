@@ -1,0 +1,4 @@
+# Ignore generated contributor guide
+AGENTS.md
+CLAUDE.md
+GEMINI.md

@@ -1,0 +1,6 @@
+[user]
+	email = josephgoksu@gmail.com
+	name = Joseph Goksu
+	signingkey = DC68B8F0CFED8F79
+[commit]
+	gpgsign = true
