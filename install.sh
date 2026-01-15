@@ -50,6 +50,7 @@ fi
 # Create necessary directories
 mkdir -p "$CONFIG_DIR"
 mkdir -p "$CONFIG_DIR/ghostty"
+mkdir -p "$CONFIG_DIR/nvim"
 mkdir -p "$HOME/.nvm"
 
 # Install Oh My Zsh if not installed
@@ -116,6 +117,13 @@ ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES_DIR/.config/starship.toml" "$CONFIG_DIR/starship.toml"
 ln -sf "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$DOTFILES_DIR/.config/ghostty/config" "$CONFIG_DIR/ghostty/config"
+
+# Neovim config (symlink entire directory)
+if [ -d "$CONFIG_DIR/nvim" ] && [ ! -L "$CONFIG_DIR/nvim" ]; then
+    backup_if_exists "$CONFIG_DIR/nvim"
+fi
+rm -rf "$CONFIG_DIR/nvim"
+ln -sf "$DOTFILES_DIR/.config/nvim" "$CONFIG_DIR/nvim"
 
 # Install remaining dependencies
 print_status "Installing remaining dependencies..."
