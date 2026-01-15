@@ -1,0 +1,203 @@
+{
+  // Editor Core Settings
+  "editor.fontFamily": "'Fira Code iScript', 'FiraCode-Retina','Fira Code', 'Courier New', monospace",
+  "editor.fontSize": 15,
+  "editor.lineHeight": 18,
+  "editor.letterSpacing": 0.15,
+  "editor.fontLigatures": true,
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 5,
+  "editor.cursorBlinking": "solid",
+  "editor.renderWhitespace": "all",
+  "editor.renderLineHighlight": "all",
+  "editor.stickyScroll.enabled": true,
+  "editor.codeLens": true,
+  "editor.glyphMargin": true,
+  "editor.linkedEditing": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.semanticHighlighting.enabled": false,
+  "editor.largeFileOptimizations": false,
+  "editor.accessibilitySupport": "off",
+
+  // Editor Behavior
+  "editor.detectIndentation": false,
+  "editor.formatOnType": false,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.inlineSuggest.enabled": true,
+  "editor.snippetSuggestions": "top",
+
+  // Editor Suggestions and Intelligence
+  "editor.suggestSelection": "first",
+  "editor.suggest.showSnippets": false,
+  "editor.suggest.showMethods": true,
+  "editor.suggest.showFiles": true,
+  "editor.suggest.showStatusBar": true,
+  "editor.suggest.showProperties": true,
+  "editor.suggest.showClasses": true,
+  "editor.suggest.showFunctions": true,
+  "editor.suggest.showConstants": true,
+  "editor.suggest.showEnums": true,
+  "editor.suggest.showEnumMembers": true,
+  "editor.suggest.preview": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.tabCompletion": "on",
+  "editor.parameterHints.enabled": true,
+  "editor.links": true,
+
+  // Workbench Settings
+  "workbench.fontAliasing": "auto",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.view.alwaysShowHeaderActions": true,
+  "workbench.editor.enablePreview": false,
+  "workbench.sideBar.location": "right",
+  "workbench.iconTheme": "vscode-icons",
+
+  // Window Settings
+  "window.nativeTabs": true,
+  "window.nativeFullScreen": true,
+  "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
+
+  // Terminal Settings
+  "terminal.integrated.fontFamily": "'Fira Code iScript', 'FiraCode-Retina','Fira Code', 'Inconsolata for Powerline', monospace",
+  "terminal.integrated.macOptionIsMeta": true,
+  "terminal.integrated.inheritEnv": false,
+
+  // File Management
+  "files.autoSave": "off",
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+
+  // Search Settings
+  "search.useIgnoreFiles": true,
+  "search.followSymlinks": false,
+  "search.smartCase": true,
+
+  // Git Settings
+  "git.autofetch": true,
+  "git.autorefresh": true,
+  "git.confirmSync": false,
+  "git.fetchOnPull": true,
+  "git.enableCommitSigning": true,
+  "git.showPushSuccessNotification": false,
+  "gitignore.cacheExpirationInterval": 3600,
+
+  // Language Specific Settings
+  "javascript.suggest.names": true,
+  "javascript.suggest.paths": true,
+  "javascript.suggest.enabled": true,
+  "javascript.suggest.autoImports": true,
+  "javascript.suggest.completeJSDocs": true,
+  "javascript.suggestionActions.enabled": true,
+  "javascript.suggest.completeFunctionCalls": true,
+  "javascript.referencesCodeLens.enabled": true,
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // NPM Settings
+  "npm-intellisense.importES6": true,
+  "npm-intellisense.importQuotes": "'",
+  "npm-intellisense.importLinebreak": ";\r\n",
+  "npm-intellisense.importDeclarationType": "const",
+  "npm.packageManager": "npm",
+
+  // Minimap Settings
+  "editor.minimap.side": "left",
+  "editor.minimap.enabled": false,
+  "editor.minimap.renderCharacters": false,
+
+  // Code Actions and Formatting
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // Language-specific Formatters
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "docker.docker"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "docker.docker"
+  },
+
+  // Extension-specific Settings
+  "vsicons.dontShowNewVersionMessage": true,
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "prisma.showPrismaDataPlatformNotification": false,
+
+  // Telemetry Settings
+  "telemetry.telemetryLevel": "off",
+"redhat.telemetry.enabled": false,
+"shellcheck.disableVersionCheck": true,
+  "aws.telemetry": false,
+  "continue.telemetryEnabled": false,
+
+  // Misc Settings
+  "keyboard.touchbar.enabled": true,
+  "extensions.ignoreRecommendations": true,
+  "todohighlight.keywords": ["REFACTOR", "FIXME", "BUG", "CHANGES"],
+  "todohighlight.isEnable": true,
+  "outline.icons": true,
+  "outline.problems.colors": true,
+  "explorer.confirmDragAndDrop": false,
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.codeLens": true,
+  "makefile.configureOnOpen": true,
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "gitlens.mode.active": "zen",
+  "docker.extension.enableComposeLanguageServer": false,
+  "go.toolsManagement.autoUpdate": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-5-mini",
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.selectedModel": "opus"
+}

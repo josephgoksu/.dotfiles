@@ -134,4 +134,13 @@ if [ -f "$DOTFILES_DIR/macos/settings.sh" ]; then
     fi
 fi
 
+# Optionally apply VS Code settings
+if [ -f "$DOTFILES_DIR/vscode/sync.sh" ] && command -v code &>/dev/null; then
+    read -p "Apply saved VS Code settings and extensions? [y/N] " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        "$DOTFILES_DIR/vscode/sync.sh" apply
+    fi
+fi
+
 print_status "Setup complete! Please restart your shell."
