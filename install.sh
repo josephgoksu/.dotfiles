@@ -100,21 +100,22 @@ if [ ! -d "$ZSH_CUSTOM/plugins/zsh-completions" ]; then
     git clone https://github.com/zsh-users/zsh-completions.git "$ZSH_CUSTOM/plugins/zsh-completions"
 fi
 
-if [ ! -d "$ZSH_CUSTOM/plugins/alias-tips" ]; then
-    git clone https://github.com/djui/alias-tips.git "$ZSH_CUSTOM/plugins/alias-tips"
+if [ ! -d "$ZSH_CUSTOM/plugins/history-substring-search" ]; then
+    git clone https://github.com/zsh-users/zsh-history-substring-search.git "$ZSH_CUSTOM/plugins/history-substring-search"
 fi
 
-# Create symlinks
+# Create symlinks (only backup real files, not existing symlinks)
 print_status "Creating symlinks..."
-backup_if_exists "$HOME/.zshrc"
-backup_if_exists "$CONFIG_DIR/starship.toml"
-backup_if_exists "$HOME/.gitconfig"
-backup_if_exists "$CONFIG_DIR/ghostty/config.toml"
+for file in "$HOME/.zshrc" "$CONFIG_DIR/starship.toml" "$HOME/.gitconfig" "$CONFIG_DIR/ghostty/config"; do
+    if [ -e "$file" ] && [ ! -L "$file" ]; then
+        backup_if_exists "$file"
+    fi
+done
 
 ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES_DIR/.config/starship.toml" "$CONFIG_DIR/starship.toml"
 ln -sf "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
-ln -sf "$DOTFILES_DIR/.config/ghostty/config.toml" "$CONFIG_DIR/ghostty/config.toml"
+ln -sf "$DOTFILES_DIR/.config/ghostty/config" "$CONFIG_DIR/ghostty/config"
 
 # Install remaining dependencies
 print_status "Installing remaining dependencies..."
@@ -122,6 +123,15 @@ if ! brew bundle --file="$DOTFILES_DIR/Brewfile"; then
     print_warning "Some Brewfile dependencies failed to install."
     print_warning "This is normal for some packages or if they are no longer available."
     print_warning "You can try installing failed packages manually."
+fi
+
+# Optionally apply macOS settings
+if [ -f "$DOTFILES_DIR/macos/settings.sh" ]; then
+    read -p "Apply saved macOS settings (Dock, Finder, keyboard, trackpad)? [y/N] " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        "$DOTFILES_DIR/macos/settings.sh" apply
+    fi
 fi
 
 print_status "Setup complete! Please restart your shell."

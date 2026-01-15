@@ -1,84 +1,66 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
+# Path to oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
-
-# Disable Oh My Zsh theme since using Starship
 ZSH_THEME=""
+ZSH_DISABLE_COMPFIX=true  # Skip compaudit (saves ~16ms)
 
-# Enable case-insensitive tab completion
+# Completion settings
 CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
-
-# Auto-update settings for Oh My Zsh
-zstyle ':omz:update' mode auto # update automatically
-zstyle ':omz:update' frequency 13
-
-# Enable command auto-correction and completion waiting dots
-ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
-
-# Disable marking untracked files as dirty (improves speed in large repos)
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Display command execution timestamps in history
 HIST_STAMPS="yyyy-mm-dd"
 
-# Plugins - keep lightweight to ensure fast startup
+# Minimal plugins - removed bloat (docker/aws/kubectl/etc are just aliases)
 plugins=(
     git
     zsh-autosuggestions
     fast-syntax-highlighting
     zsh-completions
     fzf
-    alias-tips
     history-substring-search
-    docker
-    docker-compose
-    aws
-    golang
-    npm
-    nvm
-    kubectl
-    terraform
-    gh
-    git-extras
 )
 
 source $ZSH/oh-my-zsh.sh
 
-# Set language and editor preferences
+# Environment
 export LANG=en_US.UTF-8
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='nvim'
-fi
-
-# Enable Docker BuildKit
+export EDITOR='nvim'
 export DOCKER_BUILDKIT=1
-
-# Load NVM properly
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-
-# Ensure GPG_TTY is set correctly
 export GPG_TTY=$(tty)
 
-# Add Windsurf, Go, and additional binaries to PATH
-# Consolidate PATH modifications
-export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"                         # Rust binaries
-export PATH="$HOME/.krew/bin:$PATH"                          # Krew for Kubernetes plugins
-export PATH="$HOME/.codeium/windsurf/bin:$PATH"
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"            # Added from previous separate export
+# PATH - set once, not multiple exports
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$HOME/.codeium/windsurf/bin:/opt/homebrew/opt/openjdk/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 
-# Initialize Starship prompt
+# Lazy-load NVM (saves ~200ms)
+export NVM_DIR="$HOME/.nvm"
+nvm() {
+    unset -f nvm node npm npx
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+    nvm "$@"
+}
+node() { nvm use default >/dev/null 2>&1; unset -f node; node "$@"; }
+npm() { nvm use default >/dev/null 2>&1; unset -f npm; npm "$@"; }
+npx() { nvm use default >/dev/null 2>&1; unset -f npx; npx "$@"; }
+
+# Lazy-load pyenv (saves ~100ms)
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+pyenv() {
+    unset -f pyenv python python3 pip pip3
+    eval "$(command pyenv init - zsh)"
+    pyenv "$@"
+}
+python() { eval "$(command pyenv init - zsh)"; unset -f python; python "$@"; }
+python3() { eval "$(command pyenv init - zsh)"; unset -f python3; python3 "$@"; }
+pip() { eval "$(command pyenv init - zsh)"; unset -f pip; pip "$@"; }
+pip3() { eval "$(command pyenv init - zsh)"; unset -f pip3; pip3 "$@"; }
+
+# Fast inits only
 eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
 
-# Useful aliases
+# Aliases
 alias nv="nvim"
 alias ll="ls -la"
 alias gs="git status"
@@ -87,12 +69,7 @@ alias gb="git branch"
 alias gc="git commit -m"
 alias kctx="kubectl config use-context"
 alias kns="kubectl config set-context --current --namespace"
-alias tf="terraform"
-
-# Faster directory navigation
+alias tf="tofu"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
-alias tw="/Users/josephgoksu/Development/products/taskWing-cli/bin/taskwing"
