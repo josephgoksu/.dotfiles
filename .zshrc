@@ -72,7 +72,7 @@ export GPG_TTY=$(tty)
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"                         # Rust binaries
 export PATH="$HOME/.krew/bin:$PATH"                          # Krew for Kubernetes plugins
-export PATH="/Users/josephgoksu/.codeium/windsurf/bin:$PATH" # Added from previous separate export
+export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"            # Added from previous separate export
 
 # Initialize Starship prompt
@@ -95,3 +95,4 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+alias tw="/Users/josephgoksu/Development/products/taskWing-cli/bin/taskwing"
