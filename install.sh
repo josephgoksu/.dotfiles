@@ -5,6 +5,24 @@ set -e
 DOTFILES_DIR="$HOME/.dotfiles"
 CONFIG_DIR="$HOME/.config"
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+SKIP_PERSONAL=false
+
+# Parse arguments
+for arg in "$@"; do
+    case $arg in
+        --skip-personal)
+            SKIP_PERSONAL=true
+            ;;
+        --help|-h)
+            echo "Usage: ./install.sh [OPTIONS]"
+            echo ""
+            echo "Options:"
+            echo "  --skip-personal  Skip .gitconfig symlink (preserves work git/GPG identity)"
+            echo "  --help, -h       Show this help message"
+            exit 0
+            ;;
+    esac
+done
 
 print_status() {
     echo -e "\033[1;34m==> $1\033[0m"
@@ -25,7 +43,11 @@ backup_if_exists() {
     fi
 }
 
-print_status "Setting up dotfiles..."
+if [ "$SKIP_PERSONAL" = true ]; then
+    print_status "Setting up dotfiles (--skip-personal: keeping .gitconfig)..."
+else
+    print_status "Setting up dotfiles..."
+fi
 
 # Install Homebrew first as it's needed for everything else
 if ! command -v brew &>/dev/null; then
@@ -50,7 +72,6 @@ fi
 # Create necessary directories
 mkdir -p "$CONFIG_DIR"
 mkdir -p "$CONFIG_DIR/ghostty"
-mkdir -p "$CONFIG_DIR/nvim"
 mkdir -p "$HOME/.nvm"
 
 # Install Oh My Zsh if not installed
@@ -107,7 +128,7 @@ fi
 
 # Create symlinks (only backup real files, not existing symlinks)
 print_status "Creating symlinks..."
-for file in "$HOME/.zshrc" "$CONFIG_DIR/starship.toml" "$HOME/.gitconfig" "$CONFIG_DIR/ghostty/config"; do
+for file in "$HOME/.zshrc" "$CONFIG_DIR/starship.toml" "$CONFIG_DIR/ghostty/config"; do
     if [ -e "$file" ] && [ ! -L "$file" ]; then
         backup_if_exists "$file"
     fi
@@ -115,8 +136,17 @@ done
 
 ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES_DIR/.config/starship.toml" "$CONFIG_DIR/starship.toml"
-ln -sf "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$DOTFILES_DIR/.config/ghostty/config" "$CONFIG_DIR/ghostty/config"
+
+# Only symlink .gitconfig in personal mode (not work mode)
+if [ "$SKIP_PERSONAL" = false ]; then
+    if [ -e "$HOME/.gitconfig" ] && [ ! -L "$HOME/.gitconfig" ]; then
+        backup_if_exists "$HOME/.gitconfig"
+    fi
+    ln -sf "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
+else
+    print_status "Skipping .gitconfig (preserving existing git/GPG identity)"
+fi
 
 # Neovim config (symlink entire directory)
 if [ -d "$CONFIG_DIR/nvim" ] && [ ! -L "$CONFIG_DIR/nvim" ]; then
